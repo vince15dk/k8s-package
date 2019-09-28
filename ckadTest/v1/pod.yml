@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: subpath-pod
+spec:
+  containers:
+   - name: sub1
+     image: nginx
+     volumeMounts:
+       - name: myvolume
+         mountPath: /etc/test
+   - name: sub2
+     image: busybox
+     args: ['echo "hello"; sleep 3600']
+     volumeMounts:
+       - name: myvolume
+         mountPath: /etc/test
+  volumes:
+    - name: myvolume
+      emptyDir: {}

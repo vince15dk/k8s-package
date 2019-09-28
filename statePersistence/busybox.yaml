@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: busybox
+  name: busybox
+spec:
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - sleep 3600
+    image: busybox
+    name: busybox
+    volumeMounts:
+     - name: volume-config
+       mountPath: /etc/foo
+  - args:
+    - /bin/sh
+    - -c
+    - sleep 3600
+    image: busybox
+    name: busybox2
+    volumeMounts:
+     - name: volume-config
+       mountPath: /etc/goo
+  restartPolicy: Never
+  volumes:
+    - name: volume-config
+      emptyDir: {}
